@@ -1,13 +1,16 @@
 import io from 'socket.io-client';
+//const BASE_URL = `http://localhost:8080`;
+const BASE_URL = `https://e55e52a1-e95c-4ded-ad62-992a653e94c6-dev.e1-us-east-azure.choreoapis.dev`;
 
-const SOCKET_URL = `https://e55e52a1-e95c-4ded-ad62-992a653e94c6-dev.e1-us-east-azure.choreoapis.dev/default/bingo-api/v1.0`;
-
-export const socket = io(SOCKET_URL, {
+export const socket = io(BASE_URL, {
+    path: "/default/bingo-api/v1.0/socket.io", // Ensure this matches your Choreo API context
     autoConnect: true,
     reconnection: true,
-    extraHeaders: {
-        "ngrok-skip-browser-warning": "true"
-    }
+    //withCredentials: true,
+    // transports: ['polling', 'websocket'], // Force polling first to bypass potential WS upgrade issues
+    // extraHeaders: {
+    //     "ngrok-skip-browser-warning": "true",
+    // }
 });
 
 export const GameService = {
@@ -69,5 +72,6 @@ export const GameService = {
         socket.emit('restart_game', { roomId });
     }
 };
+
 
 
