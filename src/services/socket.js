@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 
-const SOCKET_URL = `wss://e55e52a1-e95c-4ded-ad62-992a653e94c6-dev.e1-us-east-azure.choreoapis.dev/default/bingo-api/v1.0`;
+const SOCKET_URL = `https://e55e52a1-e95c-4ded-ad62-992a653e94c6-dev.e1-us-east-azure.choreoapis.dev/default/bingo-api/v1.0`;
 
 export const socket = io(SOCKET_URL, {
     autoConnect: true,
@@ -69,4 +69,5 @@ export const GameService = {
         socket.emit('restart_game', { roomId });
     }
 };
+
 
