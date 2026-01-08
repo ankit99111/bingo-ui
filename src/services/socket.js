@@ -1,9 +1,11 @@
 import io from 'socket.io-client';
-//const BASE_URL = `http://localhost:8080`;
-const BASE_URL = `https://e55e52a1-e95c-4ded-ad62-992a653e94c6-dev.e1-us-east-azure.choreoapis.dev`;
+const BASE_URL = localStorage.getItem('BASE_URL') || `https://e55e52a1-e95c-4ded-ad62-992a653e94c6-dev.e1-us-east-azure.choreoapis.dev`;
+// Allows "" (empty string) to be a valid path if set in localStorage
+const storedPath = localStorage.getItem('BASE_PATH');
+const BASE_PATH = storedPath !== null ? storedPath : "/default/bingo-api/v1.0/socket.io";
 
 export const socket = io(BASE_URL, {
-    path: "/default/bingo-api/v1.0/socket.io", // Ensure this matches your Choreo API context
+    path: BASE_PATH,
     autoConnect: true,
     reconnection: true,
     //withCredentials: true,
@@ -72,6 +74,7 @@ export const GameService = {
         socket.emit('restart_game', { roomId });
     }
 };
+
 
 
 
